@@ -3,6 +3,7 @@ from django.views.generic import ListView,DetailView
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView
 from django.views.generic.dates import DayArchiveView, TodayArchiveView
 from blog.models import Post
+from django.views.generic.base import TemplateView
 # Create your views here.
 
 class PostLV(ListView):
@@ -34,3 +35,6 @@ class PostDAV(DayArchiveView):
 class PostTAV(TodayArchiveView):
     model = Post
     date_field = 'modify_date'
+
+class HomeView(TemplateView):
+    template_name = 'home.html'

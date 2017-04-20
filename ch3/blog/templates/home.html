@@ -1,0 +1,17 @@
+
+    {% extends "base.html" %} <!-- html 상속-->
+    {% block title %}home.html{% endblock %} <!--타이틀 재정의 home.html이라고 지정-->
+    {% load staticfiles %} <!--static 태그를 쓰기 위해서 로딩해야 함-->
+    {% block extrastyle %}{% static "css/home.css" %}{% endblock %}
+
+    {% block content %}
+    <div id="content_home">
+      This is CONTENT area.
+    </div>
+    {% endblock content %}
+
+    {% block footer %}
+    <div id="footer">
+      This is footer area.
+    </div>
+    {% endblock footer %}
