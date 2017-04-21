@@ -2,7 +2,7 @@ from __future__ import unicode_literals #파이썬2,3 문자열 처리 호환
 from django.db import models
 from django.core.urlresolvers import reverse #reverse 함수는 URL패턴을 만들어주는 함수
 from django.utils.encoding import python_2_unicode_compatible #파이썬2,3 문자열 처리 호환
-
+from tagging.fields import TagField # 태그라이브러리
 # Create your models here.
 @python_2_unicode_compatible
 class Post(models.Model):
@@ -12,6 +12,7 @@ class Post(models.Model):
     content = models.TextField('CONTENT')
     create_date = models.DateTimeField('Create Date',auto_now_add=True)#antu_now_add = 객체가 생성될 때 자동 기록
     modify_date = models.DateTimeField('Modify_Date',auto_now=True)#auto_now = 데이터베이스에 저장될 때 자동 기록
+    tag = TagField()
 
     class Meta: #필드 외에 필요한 파라미터는 메타클래스에 정의
         verbose_name = 'post' #테이블 단수 별칭

@@ -4,6 +4,8 @@ from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthA
 from django.views.generic.dates import DayArchiveView, TodayArchiveView
 from blog.models import Post
 from django.views.generic.base import TemplateView
+from tagging.models import Tag, TaggedItem #추가
+from tagging.views import TaggedObjectList #추가
 # Create your views here.
 
 class PostLV(ListView):
@@ -38,3 +40,10 @@ class PostTAV(TodayArchiveView):
 
 class HomeView(TemplateView):
     template_name = 'home.html'
+
+class TagTV(TemplateView):
+    template_name = 'tagging/tagging_cloud.html'
+
+class PostTOL(TaggedObjectList):
+    model = Post
+    template_name = 'tagging/tagging_post_list.html'
