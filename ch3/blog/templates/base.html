@@ -14,8 +14,8 @@
     </div>
 
     <div id="menu">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Blog</a></li>
+      <li><a href="{% url 'home'%}">Home</a></li>
+      <li><a href="{% url 'blog:index'%}">Blog</a></li>
       <li><a href="#">Photo</a></li>
       <li><a href="#">Bookmark</a></li>
 
@@ -26,9 +26,9 @@
         <li><a href="#">Photo</a></li>
       </ul>
     </li>
-    <li><a href="#">Archive</a></li>
+    <li><a href="{% url 'blog:post_archive'%}">Archive</a></li>
     <li><a href="#">Search</a></li>
-    <li><a href="#">Admin</a></li>
+    <li><a href="{% url 'admin:index'%}">Admin</a></li>
     </div>
     {% block content %}{% endblock %} <!--하위페이지마다 본문내용 정의 가능-->
     {% block footer %}{% endblock %} <!--하위페이지마다 꼬리말 다르게 정의 가능-->

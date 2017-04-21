@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends "base.html"%}
+{% block title %}post_archive_month.html{% endblock %}
+{% block content %}
+<div id="content">
     <h1>Post Archives for {{month|date:"N, Y"}}</h1>
     <div>
       <ul>
@@ -16,5 +13,5 @@
         {% endfor%}
       </ul>
     </div>
-  </body>
-</html>
+</div>
+{% endblock %}  

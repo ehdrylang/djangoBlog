@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends "base.html"%}
+{% block title %}post_archive_year.html{% endblock %}
+{% block content %}
+<div id="content">
     <ul>
       {% for date in date_list %}
         <li style="display:inline;">
@@ -24,5 +21,5 @@
        {% endfor %}
      </ul>
    </div>
-  </body>
-</html>
+ </div>
+ {% endblock %}

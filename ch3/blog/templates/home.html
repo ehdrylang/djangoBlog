@@ -1,5 +1,5 @@
 
-    {% extends "base.html" %} <!-- html 상속-->
+    {% extends "base.html" %} <!-- html 상속 반드시 첫줄에 와야함-->
     {% block title %}home.html{% endblock %} <!--타이틀 재정의 home.html이라고 지정-->
     {% load staticfiles %} <!--static 태그를 쓰기 위해서 로딩해야 함-->
     {% block extrastyle %}{% static "css/home.css" %}{% endblock %} <!--base.css스타일시트외에 추가적으로 home.css지정-->
@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <td>
-            <b><i><a href="#">Blog</a></i></b>
+            <b><i><a href="{% url 'blog:index' %}">Blog</a></i></b>
           </td>
           <td>
             You can write your own post and share to others. Donex id dlit non mi porta gravide at eget metus. Fusce dapibus, tellus ac cursus commodo
