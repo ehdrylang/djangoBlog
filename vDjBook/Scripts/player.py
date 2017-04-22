@@ -6,20 +6,19 @@
 
 from __future__ import print_function
 
-import sys
-
-if sys.version_info[0] > 2:
-    import tkinter
-else:
-    import Tkinter as tkinter
+try:
+    from tkinter import *
+except ImportError:
+    from Tkinter import *
 
 from PIL import Image, ImageTk
+import sys
 
 
 # --------------------------------------------------------------------
 # an image animation player
 
-class UI(tkinter.Label):
+class UI(Label):
 
     def __init__(self, master, im):
         if isinstance(im, list):
@@ -35,11 +34,14 @@ class UI(tkinter.Label):
         else:
             self.image = ImageTk.PhotoImage(im)
 
-        tkinter.Label.__init__(self, master, image=self.image, bg="black", bd=0)
+        Label.__init__(self, master, image=self.image, bg="black", bd=0)
 
         self.update()
 
-        duration = im.info.get("duration", 100)
+        try:
+            duration = im.info["duration"]
+        except KeyError:
+            duration = 100
         self.after(duration, self.next)
 
     def next(self):
@@ -62,7 +64,10 @@ class UI(tkinter.Label):
             except EOFError:
                 return  # end of file
 
-        duration = im.info.get("duration", 100)
+        try:
+            duration = im.info["duration"]
+        except KeyError:
+            duration = 100
         self.after(duration, self.next)
 
         self.update_idletasks()
@@ -79,7 +84,7 @@ if __name__ == "__main__":
 
     filename = sys.argv[1]
 
-    root = tkinter.Tk()
+    root = Tk()
     root.title(filename)
 
     if len(sys.argv) > 2:

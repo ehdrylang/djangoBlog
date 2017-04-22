@@ -7,34 +7,32 @@
 # as a dynamically updated overlay
 #
 
-import sys
-
-if sys.version_info[0] > 2:
-    import tkinter
-else:
-    import Tkinter as tkinter
+try:
+    from tkinter import *
+except ImportError:
+    from Tkinter import *
 
 from PIL import Image, ImageTk
+import sys
 
 #
 # an image viewer
 
 
-class UI(tkinter.Frame):
+class UI(Frame):
     def __init__(self, master, im, value=128):
-        tkinter.Frame.__init__(self, master)
+        Frame.__init__(self, master)
 
         self.image = im
         self.value = value
 
-        self.canvas = tkinter.Canvas(self, width=im.size[0], height=im.size[1])
+        self.canvas = Canvas(self, width=im.size[0], height=im.size[1])
         self.backdrop = ImageTk.PhotoImage(im)
-        self.canvas.create_image(0, 0, image=self.backdrop, anchor=tkinter.NW)
+        self.canvas.create_image(0, 0, image=self.backdrop, anchor=NW)
         self.canvas.pack()
 
-        scale = tkinter.Scale(self, orient=tkinter.HORIZONTAL, from_=0, to=255,
-                              resolution=1, command=self.update_scale,
-                              length=256)
+        scale = Scale(self, orient=HORIZONTAL, from_=0, to=255,
+                      resolution=1, command=self.update_scale, length=256)
         scale.set(value)
         scale.bind("<ButtonRelease-1>", self.redraw)
         scale.pack()
@@ -56,7 +54,7 @@ class UI(tkinter.Frame):
 
         # update canvas
         self.canvas.delete("overlay")
-        self.canvas.create_image(0, 0, image=self.overlay, anchor=tkinter.NW,
+        self.canvas.create_image(0, 0, image=self.overlay, anchor=NW,
                                  tags="overlay")
 
 # --------------------------------------------------------------------
@@ -66,7 +64,7 @@ if len(sys.argv) != 2:
     print("Usage: thresholder file")
     sys.exit(1)
 
-root = tkinter.Tk()
+root = Tk()
 
 im = Image.open(sys.argv[1])
 

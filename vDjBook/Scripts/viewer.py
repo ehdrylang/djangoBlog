@@ -6,12 +6,10 @@
 
 from __future__ import print_function
 
-import sys
-
-if sys.version_info[0] > 2:
-    import tkinter
-else:
-    import Tkinter as tkinter
+try:
+    from tkinter import Tk, Label
+except ImportError:
+    from Tkinter import Tk, Label
 
 from PIL import Image, ImageTk
 
@@ -19,25 +17,26 @@ from PIL import Image, ImageTk
 # an image viewer
 
 
-class UI(tkinter.Label):
+class UI(Label):
 
     def __init__(self, master, im):
 
         if im.mode == "1":
             # bitmap image
             self.image = ImageTk.BitmapImage(im, foreground="white")
-            tkinter.Label.__init__(self, master, image=self.image, bd=0,
-                                   bg="black")
+            Label.__init__(self, master, image=self.image, bg="black", bd=0)
 
         else:
             # photo image
             self.image = ImageTk.PhotoImage(im)
-            tkinter.Label.__init__(self, master, image=self.image, bd=0)
+            Label.__init__(self, master, image=self.image, bd=0)
 
 #
 # script interface
 
 if __name__ == "__main__":
+
+    import sys
 
     if not sys.argv[1:]:
         print("Syntax: python viewer.py imagefile")
@@ -45,7 +44,7 @@ if __name__ == "__main__":
 
     filename = sys.argv[1]
 
-    root = tkinter.Tk()
+    root = Tk()
     root.title(filename)
 
     im = Image.open(filename)

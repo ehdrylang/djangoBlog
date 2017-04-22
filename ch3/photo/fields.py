@@ -1,4 +1,4 @@
-from  django.models.fields.files import ImageField,ImageFieldFile
+from  django.db.models.fields.files import ImageField,ImageFieldFile
 from PIL import Image
 import os
 #썸네일파일 이름 생성 기존파일에 . 앞부분 잘라서 thumb.jpg붙이는 함수

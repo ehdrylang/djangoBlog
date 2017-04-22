@@ -9,23 +9,21 @@
 # the image into a set of tiles.
 #
 
-import sys
-
-if sys.version_info[0] > 2:
-    import tkinter
-else:
-    import Tkinter as tkinter
+try:
+    from tkinter import Tk, Canvas, NW
+except ImportError:
+    from Tkinter import Tk, Canvas, NW
 
 from PIL import Image, ImageTk
+import sys
 
 #
 # painter widget
 
 
-class PaintCanvas(tkinter.Canvas):
+class PaintCanvas(Canvas):
     def __init__(self, master, image):
-        tkinter.Canvas.__init__(self, master,
-                                width=image.size[0], height=image.size[1])
+        Canvas.__init__(self, master, width=image.size[0], height=image.size[1])
 
         # fill the canvas
         self.tile = {}
@@ -35,7 +33,7 @@ class PaintCanvas(tkinter.Canvas):
             for y in range(0, ysize, tilesize):
                 box = x, y, min(xsize, x+tilesize), min(ysize, y+tilesize)
                 tile = ImageTk.PhotoImage(image.crop(box))
-                self.create_image(x, y, image=tile, anchor=tkinter.NW)
+                self.create_image(x, y, image=tile, anchor=NW)
                 self.tile[(x, y)] = box, tile
 
         self.image = image
@@ -72,7 +70,7 @@ if len(sys.argv) != 2:
     print("Usage: painter file")
     sys.exit(1)
 
-root = tkinter.Tk()
+root = Tk()
 
 im = Image.open(sys.argv[1])
 
