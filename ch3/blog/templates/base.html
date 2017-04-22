@@ -27,7 +27,7 @@
       </ul>
     </li>
     <li><a href="{% url 'blog:post_archive'%}">Archive</a></li>
-    <li><a href="#">Search</a></li>
+    <li><a href="{% url 'blog:search'%}">Search</a></li>
     <li><a href="{% url 'admin:index'%}">Admin</a></li>
     </div>
     {% block content %}{% endblock %} <!--하위페이지마다 본문내용 정의 가능-->
