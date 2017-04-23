@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf.urls.static import static # 정적 파일 처리하는 뷰를 호출하도록 그에맞는 URL패턴을 반환하는 함수
+from django.conf import settings # settings.py모듈에서 정의한 항목을 담은 객체를 참조하는 레퍼런스 변수
 
 from blog.views import HomeView
 
@@ -22,4 +24,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',HomeView.as_view(),name='home'),
     url(r'^blog/', include('blog.urls',namespace='blog')),
-]
+    url(r'^photo/',include('photo.urls',namespace='photo')),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

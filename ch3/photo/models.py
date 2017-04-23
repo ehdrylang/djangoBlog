@@ -18,7 +18,7 @@ class Album(models.Model):
     def __str__(self):
         return self.name
     def get_absolute_url(self):
-        return reverse('photo:album_detail',args=(self.id),)
+        return reverse('photo:album_detail',args=(self.id,))
 
 @python_2_unicode_compatible
 class Photo(models.Model):
@@ -26,7 +26,7 @@ class Photo(models.Model):
     title = models.CharField(max_length=50)
     image = ThumbnailImageField(upload_to='photo/%Y/%m')
     description = models.TextField('Photo Description',blank=True)
-    upload_date = models.DateTimeField('Upload Date',auto_now=True)
+    upload_date = models.DateTimeField('Upload Date',auto_now_add=True)
 
     class Meta:
         ordering = ['title']
@@ -35,4 +35,4 @@ class Photo(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('photo:photo_detail',args=(self.id),)
+        return reverse('photo:photo_detail',args=(self.id,))
