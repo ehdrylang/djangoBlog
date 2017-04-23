@@ -10,6 +10,10 @@ from tagging.views import TaggedObjectList #추가
 from django.views.generic.edit import FormView #폼 제네릭 뷰
 from blog.forms import PostSearchForm # 검색폼으로 사용할 사용자정의 클래스임포트
 from django.db.models import Q # 검색기능에 필요함
+# 인증기능
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
+from django.core.urlresolvers import reverse_lazy
 # Create your views here.
 
 class PostLV(ListView):
@@ -67,3 +71,9 @@ class SearchFormView(FormView): # FormView는 get요청으로 왔을때 보여�
         context['object_list'] = post_list # 검색결과도 넘김
         return render(self.request, self.template_name, context) #render함수덕분에 리다이렉트 안됨 FormView가 원래 리다이렉트함
         # render가 템플릿파일이랑 컨테스트변수를 처리해서 최총적으로 HttpResponse객체를 반환
+class UserCreateView(CreateView):
+    template_name = 'registration/register.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('register_done')
+class UserCreateDoneTV(TemplateView):
+    template_name = 'registration/register_done.html'

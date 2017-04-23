@@ -19,9 +19,15 @@ from django.conf.urls.static import static # 정적 파일 처리하는 뷰를 �
 from django.conf import settings # settings.py모듈에서 정의한 항목을 담은 객체를 참조하는 레퍼런스 변수
 
 from blog.views import HomeView
+from blog.views import UserCreateView, UserCreateDoneTV
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url(r'^accounts/',include('django.contrib.auth.urls')),
+    url(r'^accounts/register/$',UserCreateView.as_view(),name='register'),
+    url(r'^accounts/register/done/$',UserCreateDoneTV.as_view(),name='register_done'),
+
     url(r'^$',HomeView.as_view(),name='home'),
     url(r'^blog/', include('blog.urls',namespace='blog')),
     url(r'^photo/',include('photo.urls',namespace='photo')),
